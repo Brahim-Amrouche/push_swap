@@ -2,7 +2,7 @@ SRCS = ${wildcard ./src/*.c}
 
 OBJS = ${SRCS:.c=.o}
 
-HEADERS = -I./libft -I./include 
+HEADERS = -I./libft/headers -I./libft/libft -I./include 
 
 FLAGS = -Wall -Wextra -Werror -fsanitize=address $(HEADERS)
 
@@ -13,21 +13,21 @@ NAME = push_swap
 %.o : %.c
 	$(CC) $(FLAGS) -c $^ -o $@
 
+all : $(NAME)
+
 libft : 
-	$make -c ./libft bonus
+	make -C ./libft bonus
 
-all : NAME
-
-$(NAME) : $(OBJS) lifbt
-	$(CC) $(FLAGS) ./libft/libft.a $(OBJS) -o $@
+$(NAME) : $(OBJS) libft
+	$(CC) $(FLAGS) ./libft/libftprintf.a $(OBJS) -o $@
 
 clean :
 	rm -f $(OBJS)
-	$make -c ./libft clean
+	make -C ./libft clean
 
-fclean : rm
+fclean : clean
 	rm -f $(NAME)
-	$make -c ./libft fclean
+	make -C ./libft fclean
 
 re : fclean all
 

@@ -8,26 +8,25 @@ GCC = cc
 
 NAME = libft.a
 
-OBJS = $(patsubst %.c,%.o,$(SRCS))
+OBJS = ${patsubst %.c,%.o,$(SRCS)}
 
-B_OBJS = $(patsubst %.c,%.o,$(BONUS))
+B_OBJS = ${patsubst %.c,%.o,$(BONUS)}
 
 %.o : %.c
-	$(GCC) -c $^ -o $@
+	${GCC} ${FLAGS} -c $^ -o $@
 
-all : $(NAME)
+all : ${NAME}
 
-$(NAME) :  ${OBJS}
+${NAME} :  ${OBJS}
 	ar -rcs $@ ${OBJS}
 
 clean :
-	rm -f ${OBJS}
+	rm -f ${OBJS} ${B_OBJS}
 
 fclean : clean
 	rm -f ${NAME}
 
 re : fclean	all
 
-bonus : ${B_OBJS} ${NAME}
-	ar -rcs ${NAME} ${B_OBJ}
-
+bonus : ${NAME} ${B_OBJS}
+	ar -rcs ${NAME} ${B_OBJS}

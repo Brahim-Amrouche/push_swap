@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/18 04:15:32 by bamrouch         ###   ########.fr       */
+/*   Created: 2022/11/10 11:13:44 by bamrouch          #+#    #+#             */
+/*   Updated: 2022/11/16 17:35:22 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
-#include "libft.h"
+#include "tester.h"
 #include "ft_printf.h"
 
-typedef struct s_stack_group
+int main()
 {
-    t_list a;
-    t_list b;
-}   t_stack_group;
-
-t_boolean ft_manage_parser(char *input[]);
-
-#endif 
+   
+   mandatory();
+   if (BONUS_TESTS == 1)
+      bonus();
+}
