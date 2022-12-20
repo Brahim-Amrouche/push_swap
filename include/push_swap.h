@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/20 00:00:37 by bamrouch         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:36:11 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void		ft_swap_stack_top_elements(t_list **p_stack);
 void		ft_push_element_to_stack(t_list **p_stack_a, t_list **p_stack_b);
 void		ft_rotate_stack(t_list **p_stack);
 void		ft_reverse_rotate_stack(t_list **p_stack);
+void		ft_handle_commands(t_stack_group *stacks, char *cmd);
 
 #endif
