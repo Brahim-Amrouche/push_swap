@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 00:35:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/20 22:29:24 by bamrouch         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:48:56 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_print_stacks(t_stack_group *stacks)
 	ft_printf("End of printing Stacks \n");
 }
 
-
-
 int	main(int argc, char *argv[])
 {
 	t_stack_group	stacks;
@@ -43,8 +41,8 @@ int	main(int argc, char *argv[])
 	ft_init_stack_group(&(stacks.a), argc, argv);
 	ft_print_stacks(&stacks);
 	//commands
+	ft_printf("main program \n");
 	//commands
 	ft_print_stacks(&stacks);
-	ft_printf("main program");
 	return (0);
 }
