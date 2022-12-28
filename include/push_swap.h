@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/23 00:04:09 by bamrouch         ###   ########.fr       */
+/*   Updated: 2022/12/28 23:32:09 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void		ft_reverse_rotate_stack(t_list **p_stack);
 void		ft_handle_commands(t_stack_group *stacks, char *cmd);
 
 /* Stack Solution */
-void    ft_sort_stack(t_stack_group *stacks);
+int			*ft_find_lis(t_list *stack_a);
+void		ft_sort_stack(t_stack_group *stacks);
+
+/* Helpers */
+void		ft_free_lis(int ***lis);
 
 #endif

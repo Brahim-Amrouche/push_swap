@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 00:35:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/26 18:48:56 by bamrouch         ###   ########.fr       */
+/*   Updated: 2022/12/28 23:48:54 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	main(int argc, char *argv[])
 	ft_init_stack_group(&(stacks.a), argc, argv);
 	ft_print_stacks(&stacks);
 	//commands
-	ft_printf("main program \n");
+	ft_find_lis((&stacks)->a);
 	//commands
-	ft_print_stacks(&stacks);
 	return (0);
 }
