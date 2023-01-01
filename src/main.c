@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 00:35:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2022/12/31 22:29:25 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/01 21:37:41 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char *argv[])
 	// while (i < lis[0])
 	// 	ft_printf("%d\n",lis[i++]);
 	ft_find_stack_solution(&stacks,lis);
-	ft_print_stacks(&stacks);
 	//commands
 	return (0);
 }
