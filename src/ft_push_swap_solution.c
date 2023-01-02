@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/01 22:27:17 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:07:28 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,27 @@ int	ft_find_least_moves_a(t_list *stack_a, int value)
 {
 	int	pos;
 	int	stack_a_len;
+	int limits[2];
+	int i;
+	t_list *temp;
 
-	pos = 0;
-	stack_a_len = ft_lstsize(stack_a);
-	while (stack_a && pos < stack_a_len && *((int *)stack_a->content) < value)
+	temp = stack_a->next->next;
+	limits[0] = 0;
+	limits[1] = 1;
+	
+	i = 2;
+	while (temp)
 	{
-		stack_a = stack_a->next;
-		pos++;
+		if (temp > limits[1])
+			limits[1] = i;
+		if (temp < limits[0])
+			limits[0] = i;
+		temp = temp->next;
+		i++;
 	}
-    ft_printf("mal mou hadeshi content %d ; %d \n",value , pos);
+	
+	stack_a_len = ft_lstsize(stack_a);
+	
 	if (pos <= stack_a_len - pos)
 		return (pos);
 	else
@@ -128,7 +140,13 @@ void    ft_sort_stack(t_stack_group *stacks)
 
 void	ft_find_stack_solution(t_stack_group *stacks, int *lis)
 {
+	int  best_push[3];
 	ft_push_non_lis_to_b(stacks, lis);
-    ft_sort_stack(stacks);
+    ft_find_best_push(stacks,best_push);
+	ft_handle_commands(stacks,"rb");
+	ft_handle_commands(stacks,"pa");
+	ft_find_best_push(stacks,best_push);
+	ft_printf("best push value : %d;moves on A : %d;moves on B : %d\n",best_push[0],best_push[1],best_push[2]);
+	ft_print_stacks(stacks);
 	// now after finding the optiomal push it's time to apply it
 }
