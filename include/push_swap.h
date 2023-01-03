@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/01 21:36:52 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:08:23 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void		ft_free_lis(int ***lis);
 int			*ft_return_lis_result(int ***lis);
 void		ft_set_best_b_push(int value, int *res, int *temp);
 void		ft_print_stacks(t_stack_group *stacks);
+int			*ft_copy_stack_to_list(t_list *stack);
 
 #endif

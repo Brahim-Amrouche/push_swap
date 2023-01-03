@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/02 18:07:28 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:54:52 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,49 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 int	ft_find_least_moves_a(t_list *stack_a, int value)
 {
 	int	pos;
-	int	stack_a_len;
 	int limits[2];
-	int i;
-	t_list *temp;
+	int *stack_list;
 
-	temp = stack_a->next->next;
-	limits[0] = 0;
-	limits[1] = 1;
-	
-	i = 2;
-	while (temp)
+	stack_list = ft_copy_stack_to_list(stack_a);
+	if (!stack_a)
 	{
-		if (temp > limits[1])
-			limits[1] = i;
-		if (temp < limits[0])
-			limits[0] = i;
-		temp = temp->next;
-		i++;
+		ft_printf("Error\n");
+		exit(1);
 	}
 	
-	stack_a_len = ft_lstsize(stack_a);
-	
-	if (pos <= stack_a_len - pos)
-		return (pos);
+	if (stack_list[1] > stack_list[2])
+	{
+		limits[1] = 1;
+		limits[0] = 2;
+	}
 	else
-		return (pos - stack_a_len);
+	{
+		limits[1] = 2;
+		limits[0] = 1;
+	}
+	pos = 3;
+	while (pos < stack_list[0])
+	{
+		if (stack_list[pos] > stack_list[limits[1]])
+			limits[1] = pos;
+		else if (stack_list[pos] < stack_list[limits[0]])
+			limits[0] = pos;
+		pos++;
+	}
+	pos = 1;
+	while (pos < stack_list[0] - 1)
+	{
+		if (stack_list[pos] < value && stack_list[pos + 1] > value)
+			break;
+		pos++;
+	}
+	if (value < stack_list[limits[0]] || value > stack_list[limits[1]])
+		pos = limits[1];
+	pos = pos % (stack_list[0] - 1);
+	if (pos > (stack_list[0] - 1) - pos)
+		pos = pos - (stack_list[0] - 1);
+	free(stack_list);
+	return pos;
 }
 
 void	ft_find_best_push(t_stack_group *stacks, int *res)
@@ -142,10 +159,12 @@ void	ft_find_stack_solution(t_stack_group *stacks, int *lis)
 {
 	int  best_push[3];
 	ft_push_non_lis_to_b(stacks, lis);
-    ft_find_best_push(stacks,best_push);
-	ft_handle_commands(stacks,"rb");
+	// ft_handle_commands(stacks,"rr");
 	ft_handle_commands(stacks,"pa");
-	ft_find_best_push(stacks,best_push);
+	ft_handle_commands(stacks,"pa");
+	// ft_handle_commands(stacks,"ra");
+	// ft_handle_commands(stacks,"pa");
+    ft_find_best_push(stacks,best_push);
 	ft_printf("best push value : %d;moves on A : %d;moves on B : %d\n",best_push[0],best_push[1],best_push[2]);
 	ft_print_stacks(stacks);
 	// now after finding the optiomal push it's time to apply it
