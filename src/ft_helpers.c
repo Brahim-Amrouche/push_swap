@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 22:57:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/03 21:06:42 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:28:14 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	*ft_copy_stack_to_list(t_list *stack)
 {
 	int	i;
 	int	*res;
-	
+
 	res = malloc((ft_lstsize(stack) + 1) * sizeof(int));
 	if (!res)
-		return NULL;
+		return (NULL);
 	i = 1;
 	while (stack)
 	{
@@ -70,5 +70,5 @@ int	*ft_copy_stack_to_list(t_list *stack)
 		stack = stack->next;
 	}
 	res[0] = i;
-	return	res;
+	return (res);
 }
