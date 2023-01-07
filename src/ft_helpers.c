@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 22:57:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/04 20:28:14 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/07 20:07:04 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ int	*ft_return_lis_result(int ***lis)
 	return (res);
 }
 
-int	ft_abs(int i)
-{
-	if (i < 0)
-		return (i * -1);
-	return (i);
-}
 
 void	ft_set_best_b_push(int value, int *res, int *temp)
 {
