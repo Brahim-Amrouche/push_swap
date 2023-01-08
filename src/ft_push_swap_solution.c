@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/07 20:16:27 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:56:02 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	ft_find_stack_solution(t_stack_group *stacks)
 		ft_exit_process_with_error(stacks);
 	ft_push_non_lis_to_b(stacks, lis);
 	free(lis);
-	ft_sort_stack(stacks);
+	// ft_sort_stack(stacks);
+	ft_printf("moves count %d\n",ft_find_best_push_path(stacks));
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 22:57:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/07 20:07:04 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:49:42 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ int	*ft_return_lis_result(int ***lis)
 	return (res);
 }
 
+void	ft_free_best_moves_path(int ***best_moves_path,int stack_b_len)
+{
+	int i;
+
+	i = 0;
+	while(i < stack_b_len)
+		free((*best_moves_path)[i++]);
+	free(*best_moves_path);
+	*best_moves_path = NULL;
+}
 
 void	ft_set_best_b_push(int value, int *res, int *temp)
 {
