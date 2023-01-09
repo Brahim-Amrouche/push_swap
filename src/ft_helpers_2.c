@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_utils1.c                              :+:      :+:    :+:   */
+/*   ft_helpers_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 19:59:02 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/09 16:29:34 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:35:00 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ft_exit_process_with_error(t_stack_group *stacks)
 {
 	ft_printf("Error\n");
-	ft_lstclear(&(stacks->a),free);
-	ft_lstclear(&(stacks->b),free);
+	ft_lstclear(&(stacks->a), free);
+	ft_lstclear(&(stacks->b), free);
 	exit(1);
 }
 

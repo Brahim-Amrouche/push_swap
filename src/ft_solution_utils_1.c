@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_solution_utils.c                                :+:      :+:    :+:   */
+/*   ft_solution_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:58:02 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/07 20:23:00 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:58:51 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,31 @@ int	ft_fix_stack_hiearchy(t_stack_group *stacks)
 
 	temp = ft_copy_stack_to_list(stacks->a);
 	if (!temp)
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+		ft_exit_process_with_error(stacks);
 	ft_find_array_limits(temp, limits);
 	limits[0]--;
 	temp[0]--;
 	if (limits[0] > temp[0] - limits[0])
 		limits[0] = limits[0] - temp[0];
 	free(temp);
-	return limits[0];
+	return (limits[0]);
+}
+
+t_boolean	ft_is_lis_number(int *lis, int n)
+{
+	int	i;
+	int temp;
+
+	i = 0;
+	
+	while (++i < lis[0])
+		if (n == lis[i])
+		{
+			temp = lis[lis[0] - 1];
+			lis[lis[0] - 1] = lis[i];
+			lis[i] = temp;
+			lis[0]--;
+			return (TRUE);
+		}
+	return (FALSE);
 }
