@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 23:26:37 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/08 19:41:34 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:24:42 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ void	ft_opt_simult_rotate(t_stack_group *stacks,int *stack_moves)
 {
 	while (stack_moves[1] > 0 && stack_moves[2] > 0)
 	{
-		ft_rotate_stack
+		ft_rotate_stack(&(stacks->a));
+		ft_rotate_stack(&(stacks->b));
 		stack_moves[1]--;
 		stack_moves[2]--;
 	}
 	while (stack_moves[1] < 0 && stack_moves[2] < 0)
 	{
-		ft_handle_commands(stacks, "rrr");
+		ft_reverse_rotate_stack(&(stacks->a));
+		ft_reverse_rotate_stack(&(stacks->b));
 		stack_moves[1]++;
 		stack_moves[2]++;
 	}
@@ -101,40 +103,12 @@ int	ft_fix_path(t_stack_group *stacks,int *moves)
 	cpy_moves[0] = moves[0];
 	cpy_moves[1] = moves[1];
 	cpy_moves[2] = moves[2];
-	ft_rotate_stacks_simult(stacks,cpy_moves);
-	ft_rotate_stack(&(stacks->a),&(cpy_moves[1]));
-	ft_rotate_stack_b(&(stacks->b),&(cpy_moves[2]));
-	ft_handle_commands(stacks,"pa");
+	ft_opt_simult_rotate(stacks,cpy_moves);
+	ft_opt_rotate_stack(&(stacks->a),&(cpy_moves[1]));
+	ft_opt_rotate_stack(&(stacks->b),&(cpy_moves[2]));
+	ft_push_element_to_stack(&(stacks->a),&(stacks->b));
 	
 	return (ft_abs(moves[1]) + ft_abs(moves[2]) + 1);
-}
-
-int	**ft_stack_iteration_best_path(t_stack_group *stacks,t_list *temp_stack_b,int *moves_count)
-{
-    int temp_stack_b_len;
-    int **best_moves_path;
-	int	*best_push;
-    int i;
-
-    temp_stack_b_len = ft_lstsize(temp_stack_b);
-    best_moves_path = ft_calloc(temp_stack_b_len ,sizeof(int *));
-    if (!best_moves_path)
-        ft_exit_process_with_error(stacks);
-    i = 0;
-    while (temp_stack_b_len--)
-    {
-		best_push = malloc(sizeof(int) * 3);
-		if (!best_push)
-		{
-			ft_free_best_moves_path(&best_moves_path, i);
-			ft_exit_process_with_error(stacks);
-		}
-        ft_find_best_push(stacks,best_push);
-		*moves_count += ft_fix_path(stacks,best_push);
-		best_moves_path[i++] = best_push;      
-    }
-	*moves_count += ft_abs(ft_fix_stack_hiearchy(stacks));
-	return best_moves_path;
 }
 
 t_list	*ft_copy_stack(t_stack_group *stacks,t_list *cpy_stack)
@@ -175,48 +149,4 @@ t_stack_group	*ft_copy_stack_group(t_stack_group *stacks)
 	group->a = ft_copy_stack(stacks,stacks->a);
 	group->b = ft_copy_stack(stacks,stacks->b);	
 	return group;
-}
-
-void	ft_free_stack_group(t_stack_group *stacks)
-{
-	ft_lstclear(&stacks->a,free);
-	ft_lstclear(&stacks->b,free);
-	free(stacks);
-}
-
-
-
-int ft_find_best_push_path(t_stack_group *stacks)
-{
-    int stack_b_len;
-    int **path[2];
-    int total_moves_count[2];
-    int i[2];
-    t_stack_group  *temp;
-    
-    stack_b_len = ft_lstsize(stacks->b);
-    i[0] = 1;
-	temp = ft_copy_stack_group(stacks);
-	total_moves_count[0] = 0;
-	path[0] = ft_stack_iteration_best_path(temp,temp->b,&(total_moves_count[0]));
-    while (i[0] < stack_b_len)
-    {  
-		ft_free_stack_group(temp);
-		temp = ft_copy_stack_group(stacks);
-		total_moves_count[1] = i[0];
-		i[1] = i[0]++;
-		while (i[1]-- > 0)
-        	ft_rotate_stack(&(temp->b));
-		path[1] = ft_stack_iteration_best_path(temp, temp->b,&(total_moves_count[1]));
-		if (total_moves_count[1] < total_moves_count[0])
-		{
-			ft_free_best_moves_path(&(path[0]),stack_b_len);
-			path[0] = path[1];
-			total_moves_count[0] = total_moves_count[1];
-		}
-		else
-			ft_free_best_moves_path(&(path[1]),stack_b_len);
-    }
-	ft_free_stack_group(temp);
-	return total_moves_count[0];
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/08 15:55:23 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:32:27 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct s_stack_group
 void		ft_exit_process_with_error(t_stack_group *stacks);
 int			ft_abs(int i);
 void		ft_print_stacks(t_stack_group *stacks);
-void		ft_free_best_moves_path(int ***best_moves_path,int stack_b_len);
 void		ft_find_array_limits(int *array, int limits[2]);
 void		ft_free_stack_group(t_stack_group *stacks);
+t_list		*ft_copy_stack(t_stack_group *stacks, t_list *cpy_stack);
 
 /*  Input Parsing */
 void		ft_init_stack_group(t_list **stack, int input_len,
@@ -57,6 +57,5 @@ void		ft_rotate_stack_b(t_stack_group *stacks, int *stack_moves);
 int			ft_fix_stack_hiearchy(t_stack_group *stacks);
 void		ft_find_best_push(t_stack_group *stacks, int res[3]);
 int			ft_find_least_moves_a(t_stack_group *stacks, int value);
-int			ft_find_best_push_path(t_stack_group *stacks);
 
 #endif

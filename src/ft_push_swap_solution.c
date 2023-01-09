@@ -6,11 +6,22 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/08 15:56:02 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:19:02 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_boolean ft_is_lis_number(int *lis, int n)
+{
+	int i;
+
+	i = 1;
+	while (i < lis[0])
+		if (n == lis[i++])
+			return TRUE;
+	return FALSE;
+}
 
 void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 {
@@ -25,7 +36,7 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 	while (stack_len--)
 	{
 		next = temp->next;
-		if (i < lis[0] && *((int *)temp->content) == lis[i])
+		if (ft_is_lis_number(lis,*((int *)temp->content)))
 		{
 			ft_handle_commands(stacks, "ra");
 			i++;
@@ -62,15 +73,39 @@ void	ft_sort_stack(t_stack_group *stacks)
 	}
 }
 
+int	*ft_find_longest_lis(t_stack_group *stacks)
+{
+	t_list *cpy_stack_a;
+	int	stack_a_len;
+	int	*longest_lis[2];
+	
+	cpy_stack_a = ft_copy_stack(stacks,stacks->a);
+	stack_a_len = ft_lstsize(stacks->a);
+	longest_lis[1] = ft_find_lis(cpy_stack_a);
+	while(--stack_a_len)
+	{
+		ft_rotate_stack(&cpy_stack_a);
+		longest_lis[0] = ft_find_lis(cpy_stack_a);
+		if (longest_lis[0][0] > longest_lis[1][0])
+		{
+			free(longest_lis[1]);
+			longest_lis[1] = longest_lis[0];
+		}
+		else
+			free(longest_lis[0]);
+	}
+	ft_lstclear(&cpy_stack_a,free);
+	return longest_lis[1];
+}
+
 void	ft_find_stack_solution(t_stack_group *stacks)
 {
 	int	*lis;
 
-	lis = ft_find_lis(stacks->a);
+	lis = ft_find_longest_lis(stacks);
 	if (!lis)
 		ft_exit_process_with_error(stacks);
-	ft_push_non_lis_to_b(stacks, lis);
+	ft_push_non_lis_to_b(stacks,lis);
 	free(lis);
-	// ft_sort_stack(stacks);
-	ft_printf("moves count %d\n",ft_find_best_push_path(stacks));
+	ft_sort_stack(stacks);
 }

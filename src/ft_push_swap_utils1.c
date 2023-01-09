@@ -6,17 +6,18 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 19:59:02 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/08 15:21:19 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:29:34 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_exit_process_with_error(t_stack_group *stacks)
+void	ft_exit_process_with_error(t_stack_group *stacks)
 {
-    ft_printf("Error\n");
-	ft_free_stack_group(stacks);
-    exit(1);
+	ft_printf("Error\n");
+	ft_lstclear(&(stacks->a),free);
+	ft_lstclear(&(stacks->b),free);
+	exit(1);
 }
 
 int	ft_abs(int i)
@@ -28,20 +29,20 @@ int	ft_abs(int i)
 
 void	ft_print_stacks(t_stack_group *stacks)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	ft_printf("Stack a ======= \n");
 	temp = stacks->a;
 	while (temp)
 	{
-		ft_printf("%d \n", *((int *) temp->content));
+		ft_printf("%d \n", *((int *)temp->content));
 		temp = temp->next;
 	}
 	ft_printf("Stack b ======= \n");
 	temp = stacks->b;
 	while (temp)
 	{
-		ft_printf("%d \n", *((int *) temp->content));
+		ft_printf("%d \n", *((int *)temp->content));
 		temp = temp->next;
 	}
 	ft_printf("End of printing Stacks \n");
