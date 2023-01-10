@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:58:02 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/09 19:58:51 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:58:18 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	ft_fix_stack_hiearchy(t_stack_group *stacks)
 t_boolean	ft_is_lis_number(int *lis, int n)
 {
 	int	i;
-	int temp;
+	int	temp;
 
 	i = 0;
-	
 	while (++i < lis[0])
+	{
 		if (n == lis[i])
 		{
 			temp = lis[lis[0] - 1];
@@ -89,5 +89,6 @@ t_boolean	ft_is_lis_number(int *lis, int n)
 			lis[0]--;
 			return (TRUE);
 		}
+	}
 	return (FALSE);
 }

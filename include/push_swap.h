@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/09 19:08:00 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:47:59 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int			ft_abs(int i);
 void		ft_print_stacks(t_stack_group *stacks);
 void		ft_find_array_limits(int *array, int limits[2]);
 t_list		*ft_copy_stack(t_stack_group *stacks, t_list *cpy_stack);
+void		ft_free_stack_group(t_stack_group *stacks);
+t_boolean	ft_is_space(char c);
 
 /*  Input Parsing */
-void		ft_init_stack_group(t_list **stack, int input_len,
+void		ft_init_stack_group(t_stack_group *stacks, int input_len,
 				char *input_content[]);
 
 /*  Stack Commands */
@@ -57,5 +59,6 @@ int			ft_fix_stack_hiearchy(t_stack_group *stacks);
 void		ft_find_best_push(t_stack_group *stacks, int res[3]);
 int			ft_find_least_moves_a(t_stack_group *stacks, int value);
 t_boolean	ft_is_lis_number(int *lis, int n);
+void		ft_fill_non_lis(t_list *stack_a, int *lis, int *non_lis);
 
 #endif

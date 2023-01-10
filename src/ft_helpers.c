@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 22:57:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/09 19:34:17 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:47:44 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ int	*ft_copy_stack_to_list(t_list *stack)
 	}
 	res[0] = i;
 	return (res);
+}
+
+t_boolean	ft_is_space(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (TRUE);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/10 15:19:35 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:46:26 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *non_lis)
 		if (ft_is_lis_number(non_lis, *((int *)temp->content)))
 			ft_handle_commands(stacks, "pb");
 		else if (non_lis[0] == 1)
-			break;
+			break ;
 		else
 			ft_handle_commands(stacks, "ra");
 		temp = next;
@@ -72,7 +72,7 @@ int	*ft_find_longest_lis(t_stack_group *stacks)
 	{
 		ft_rotate_stack(&cpy_stack_a);
 		longest_lis[0] = ft_find_lis(cpy_stack_a);
-		if (longest_lis[0][0] >= longest_lis[1][0])
+		if (longest_lis[0][0] > longest_lis[1][0])
 		{
 			free(longest_lis[1]);
 			longest_lis[1] = longest_lis[0];
@@ -84,28 +84,11 @@ int	*ft_find_longest_lis(t_stack_group *stacks)
 	return (longest_lis[1]);
 }
 
-void	ft_fill_non_lis(t_list *stack_a,int *lis ,int *non_lis)
-{
-	int i;
-	int j;
-	
-	i = 1;
-	j = 1;
-	while(stack_a)
-	{
-		if (!ft_is_lis_number(lis, *(int *)stack_a->content))
-			non_lis[j++] = *(int *)stack_a->content;
-		else
-			i++; 
-		stack_a = stack_a->next;
-	}
-}
-
 int	*ft_find_non_lis(t_stack_group *stacks, int *lis)
 {
-	int *non_lis;
+	int	*non_lis;
 	int	non_lis_size;
-	
+
 	non_lis_size = ft_lstsize(stacks->a) + 1 - (lis[0] - 1);
 	non_lis = malloc(sizeof(int) * non_lis_size);
 	if (!non_lis)
@@ -114,26 +97,26 @@ int	*ft_find_non_lis(t_stack_group *stacks, int *lis)
 		ft_exit_process_with_error(stacks);
 	}
 	non_lis[0] = non_lis_size;
-	ft_fill_non_lis(stacks->a,lis,non_lis);
-	return non_lis;
+	ft_fill_non_lis(stacks->a, lis, non_lis);
+	return (non_lis);
 }
 
 void	ft_find_stack_solution(t_stack_group *stacks)
 {
 	int	*lis;
-	int *non_lis;
+	int	*non_lis;
 	int	stack_size;
 
 	lis = ft_find_longest_lis(stacks);
 	stack_size = ft_lstsize(stacks->a);
 	if (stack_size <= 3 && lis[0] - 1 != stack_size)
-	{	
+	{
 		ft_handle_commands(stacks, "sa");
 		lis = ft_find_longest_lis(stacks);
 	}
 	if (!lis)
 		ft_exit_process_with_error(stacks);
-	non_lis = ft_find_non_lis(stacks,lis);
+	non_lis = ft_find_non_lis(stacks, lis);
 	free(lis);
 	ft_push_non_lis_to_b(stacks, non_lis);
 	free(non_lis);
