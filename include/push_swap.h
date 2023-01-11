@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 17:52:34 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:09:37 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ void		ft_fill_non_lis(t_list *stack_a, int *lis, int *non_lis);
 void		ft_handle_three_elements_stack(t_stack_group *stacks, int **lis);
 int			*ft_find_longest_lis(t_stack_group *stacks);
 void		ft_exit_free_longest_lis(t_stack_group *stacks, int *l_lis);
+int			*ft_iterate_for_longest_lis(t_stack_group *stacks,
+				t_list **cpy_stack_a);
 
 #endif
