@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 23:42:20 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/10 18:46:26 by bamrouch         ###   ########.fr       */
+/*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
+/*   Updated: 2023/01/11 19:18:17 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,14 @@ int	*ft_find_longest_lis(t_stack_group *stacks)
 	cpy_stack_a = ft_copy_stack(stacks, stacks->a);
 	stack_a_len = ft_lstsize(stacks->a);
 	longest_lis[1] = ft_find_lis(cpy_stack_a);
+	if (!longest_lis[1])
+		ft_exit_process_with_error(stacks);
 	while (--stack_a_len)
 	{
 		ft_rotate_stack(&cpy_stack_a);
 		longest_lis[0] = ft_find_lis(cpy_stack_a);
+		if (!longest_lis[0])
+			ft_exit_free_longest_lis(stacks, longest_lis[1]);
 		if (longest_lis[0][0] > longest_lis[1][0])
 		{
 			free(longest_lis[1]);
@@ -105,17 +109,13 @@ void	ft_find_stack_solution(t_stack_group *stacks)
 {
 	int	*lis;
 	int	*non_lis;
-	int	stack_size;
 
+	if (!stacks->a)
+		return ;
 	lis = ft_find_longest_lis(stacks);
-	stack_size = ft_lstsize(stacks->a);
-	if (stack_size <= 3 && lis[0] - 1 != stack_size)
-	{
-		ft_handle_commands(stacks, "sa");
-		lis = ft_find_longest_lis(stacks);
-	}
 	if (!lis)
 		ft_exit_process_with_error(stacks);
+	ft_handle_three_elements_stack(stacks, &lis);
 	non_lis = ft_find_non_lis(stacks, lis);
 	free(lis);
 	ft_push_non_lis_to_b(stacks, non_lis);

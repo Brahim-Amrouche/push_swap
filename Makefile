@@ -15,10 +15,10 @@ NAME = push_swap
 
 all : $(NAME)
 
-libft : 
+./libft/libftprintf.a : 
 	make -C ./libft bonus
 
-$(NAME) : $(OBJS) libft
+$(NAME) : $(OBJS) ./libft/libftprintf.a
 	$(CC) $(FLAGS) ./libft/libftprintf.a $(OBJS) -o $@
 
 clean :
