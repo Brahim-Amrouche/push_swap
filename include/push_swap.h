@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 21:09:37 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:13:27 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int			ft_fix_stack_hiearchy(t_stack_group *stacks);
 void		ft_find_best_push(t_stack_group *stacks, int res[3]);
 int			ft_find_least_moves_a(t_stack_group *stacks, int value);
 t_boolean	ft_is_lis_number(int *lis, int n);
-void		ft_fill_non_lis(t_list *stack_a, int *lis, int *non_lis);
 void		ft_handle_three_elements_stack(t_stack_group *stacks, int **lis);
 int			*ft_find_longest_lis(t_stack_group *stacks);
 void		ft_exit_free_longest_lis(t_stack_group *stacks, int *l_lis);

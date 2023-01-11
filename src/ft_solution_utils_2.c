@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 23:26:37 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/10 16:58:41 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:13:17 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,4 @@ t_list	*ft_copy_stack(t_stack_group *stacks, t_list *cpy_stack)
 		cpy_stack = cpy_stack->next;
 	}
 	return (cpy_temp);
-}
-
-void	ft_fill_non_lis(t_list *stack_a, int *lis, int *non_lis)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 1;
-	while (stack_a)
-	{
-		if (!ft_is_lis_number(lis, *(int *)stack_a->content))
-			non_lis[j++] = *(int *)stack_a->content;
-		else
-			i++;
-		stack_a = stack_a->next;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 21:07:13 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:29:20 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 	stack_len = ft_lstsize(stacks->a);
 	temp = stacks->a;
 	non_lis_len = stack_len - (lis[0] - 1);
-	while (stack_len--)
+	while (stack_len-- && non_lis_len > 0)
 	{
 		next = temp->next;
 		if (ft_is_lis_number(lis, *((int *)temp->content)))
