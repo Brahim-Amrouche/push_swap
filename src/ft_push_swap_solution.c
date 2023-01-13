@@ -6,17 +6,18 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/13 02:25:56 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 02:50:00 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
+void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis,
+		t_boolean sort_stack_b)
 {
-	int		non_lis_len;
-	int		pivot;
-	int		temp;
+	int	non_lis_len;
+	int	pivot;
+	int	temp;
 
 	non_lis_len = ft_lstsize(stacks->a) - (lis[0] - 1);
 	pivot = lis[lis[0] / 2];
@@ -24,11 +25,11 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 	{
 		temp = *(int *)stacks->a->content;
 		if (ft_is_lis_number(lis, temp))
-			ft_handle_commands(stacks, "rr");
+			ft_handle_commands(stacks, "ra");
 		else
 		{
 			ft_handle_commands(stacks, "pb");
-			if (pivot < temp)
+			if (sort_stack_b && pivot < temp)
 				ft_handle_commands(stacks, "rb");
 			non_lis_len--;
 		}
@@ -80,8 +81,8 @@ void	ft_find_stack_solution(t_stack_group *stacks)
 	if (!lis)
 		ft_exit_process_with_error(stacks);
 	i = 1;
-	ft_handle_three_elements_stack(stacks, &lis);
-	ft_push_non_lis_to_b(stacks, lis);
+	if (!ft_handle_five_elements_stacks(stacks, &lis))
+		ft_push_non_lis_to_b(stacks, lis, TRUE);
 	free(lis);
 	ft_sort_stack(stacks);
 }
