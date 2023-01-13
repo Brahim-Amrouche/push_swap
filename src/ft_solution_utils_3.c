@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:24:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 21:21:07 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 02:09:06 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ int	*ft_iterate_for_longest_lis(t_stack_group *stacks, t_list **cpy_stack_a)
 	l_lis[1] = NULL;
 	while (stack_a_len--)
 	{
-		ft_rotate_stack(cpy_stack_a);
 		l_lis[0] = ft_find_lis(*cpy_stack_a);
 		if (!l_lis[0])
 			ft_exit_free_longest_lis(stacks, l_lis[1]);
 		if (!l_lis[1])
 			l_lis[1] = l_lis[0];
-		else if (l_lis[0][0] >= l_lis[1][0])
+		else if (l_lis[0][0] > l_lis[1][0])
 		{
 			free(l_lis[1]);
 			l_lis[1] = l_lis[0];
 		}
 		else
 			free(l_lis[0]);
+		ft_rotate_stack(cpy_stack_a);
 	}
 	ft_lstclear(cpy_stack_a, free);
 	return (l_lis[1]);

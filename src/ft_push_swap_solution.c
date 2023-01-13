@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 21:29:20 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 02:25:56 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis)
 {
-	t_list	*temp;
-	t_list	*next;
-	int		stack_len;
 	int		non_lis_len;
+	int		pivot;
+	int		temp;
 
-	stack_len = ft_lstsize(stacks->a);
-	temp = stacks->a;
-	non_lis_len = stack_len - (lis[0] - 1);
-	while (stack_len-- && non_lis_len > 0)
+	non_lis_len = ft_lstsize(stacks->a) - (lis[0] - 1);
+	pivot = lis[lis[0] / 2];
+	while (non_lis_len > 0)
 	{
-		next = temp->next;
-		if (ft_is_lis_number(lis, *((int *)temp->content)))
-			ft_handle_commands(stacks, "ra");
-		else if (non_lis_len > 0)
+		temp = *(int *)stacks->a->content;
+		if (ft_is_lis_number(lis, temp))
+			ft_handle_commands(stacks, "rr");
+		else
 		{
 			ft_handle_commands(stacks, "pb");
+			if (pivot < temp)
+				ft_handle_commands(stacks, "rb");
 			non_lis_len--;
 		}
-		else
-			break ;
-		temp = next;
 	}
 }
 
