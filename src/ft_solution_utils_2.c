@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 23:26:37 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/11 21:13:17 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:11:13 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_list	*ft_copy_stack(t_stack_group *stacks, t_list *cpy_stack)
 		temp = ft_lstnew(content);
 		if (!temp)
 		{
+			free(content);
 			ft_lstclear(&cpy_temp, free);
 			ft_exit_process_with_error(stacks);
 		}

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/13 02:50:00 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:02:31 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_push_non_lis_to_b(t_stack_group *stacks, int *lis,
 		else
 		{
 			ft_handle_commands(stacks, "pb");
-			if (sort_stack_b && pivot < temp)
+			if (sort_stack_b && pivot > temp)
 				ft_handle_commands(stacks, "rb");
 			non_lis_len--;
 		}
@@ -73,14 +73,12 @@ int	*ft_find_longest_lis(t_stack_group *stacks)
 void	ft_find_stack_solution(t_stack_group *stacks)
 {
 	int	*lis;
-	int	i;
 
 	if (!stacks->a)
 		return ;
 	lis = ft_find_longest_lis(stacks);
 	if (!lis)
 		ft_exit_process_with_error(stacks);
-	i = 1;
 	if (!ft_handle_five_elements_stacks(stacks, &lis))
 		ft_push_non_lis_to_b(stacks, lis, TRUE);
 	free(lis);

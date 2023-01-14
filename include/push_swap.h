@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 08:17:12 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/13 02:36:50 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:42:57 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,28 @@ void		ft_find_stack_solution(t_stack_group *stacks);
 /* LIS Helpers */
 void		ft_free_lis(int ***lis);
 int			*ft_return_lis_result(int ***lis);
-void		ft_set_best_b_push(int value, int *res, int *temp);
 int			*ft_copy_stack_to_list(t_list *stack);
 
-/* Solution helpers*/
-int			*ft_iterate_for_longest_lis(t_stack_group *stacks,
-				t_list **cpy_stack_a);
+/* Fixing Stack helpers*/
 void		ft_rotate_stacks_simult(t_stack_group *stacks, int best_push[3]);
 void		ft_rotate_stack_a(t_stack_group *stacks, int *stack_moves);
 void		ft_rotate_stack_b(t_stack_group *stacks, int *stack_moves);
 int			ft_fix_stack_hiearchy(t_stack_group *stacks);
+t_boolean	ft_handle_five_elements_stacks(t_stack_group *stacks, int **lis);
+
+/* Find Best Moves */
 void		ft_find_best_push(t_stack_group *stacks, int res[3]);
 int			ft_find_least_moves_a(t_stack_group *stacks, int value);
-t_boolean	ft_is_lis_number(int *lis, int n);
-t_boolean	ft_handle_five_elements_stacks(t_stack_group *stacks, int **lis);
+void		ft_set_best_b_push(int value, int *res, int *temp);
+
+/* Find Longest LIS */
 int			*ft_find_longest_lis(t_stack_group *stacks);
-void		ft_exit_free_longest_lis(t_stack_group *stacks, int *l_lis);
+int			*ft_iterate_for_longest_lis(t_stack_group *stacks,
+				t_list **cpy_stack_a);
+
+/* Push non LIS to B*/
 void		ft_push_non_lis_to_b(t_stack_group *stacks, int *lis,
 				t_boolean sort_stack_b);
+t_boolean	ft_is_lis_number(int *lis, int n);
 
 #endif

@@ -99,7 +99,7 @@ void	ft_init_stack_group(t_stack_group *stacks, int input_len,
 		char *input_content[])
 {
 	if (input_len == 1)
-		exit(0);
+		exit(EXIT_SUCCESS);
 	if (!ft_parse_input(&(stacks->a), input_len, input_content))
 		ft_exit_process_with_error(stacks);
 }

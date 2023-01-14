@@ -6,17 +6,26 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:24:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/13 02:49:39 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:38:01 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_exit_free_longest_lis(t_stack_group *stacks, int *l_lis)
+void	ft_exit_free_longest_lis(t_stack_group *stacks, t_list **cpy_stack_a,
+	int *l_lis)
 {
+	ft_lstclear(cpy_stack_a, free);
 	if (l_lis)
 		free(l_lis);
 	ft_exit_process_with_error(stacks);
+}
+
+void	ft_free_and_set_l_lis(int **lis, int *value)
+{
+	if (lis && *lis)
+		free(*lis);
+	*lis = value;
 }
 
 int	*ft_iterate_for_longest_lis(t_stack_group *stacks, t_list **cpy_stack_a)
@@ -30,16 +39,11 @@ int	*ft_iterate_for_longest_lis(t_stack_group *stacks, t_list **cpy_stack_a)
 	{
 		l_lis[0] = ft_find_lis(*cpy_stack_a);
 		if (!l_lis[0])
-			ft_exit_free_longest_lis(stacks, l_lis[1]);
-		if (!l_lis[1])
-			l_lis[1] = l_lis[0];
-		else if (l_lis[0][0] > l_lis[1][0])
-		{
-			free(l_lis[1]);
-			l_lis[1] = l_lis[0];
-		}
+			ft_exit_free_longest_lis(stacks, cpy_stack_a, l_lis[1]);
+		else if (!l_lis[1] || l_lis[0][0] > l_lis[1][0])
+			ft_free_and_set_l_lis(&(l_lis[1]), l_lis[0]);
 		else
-			free(l_lis[0]);
+			ft_free_and_set_l_lis(&(l_lis[0]), NULL);
 		ft_rotate_stack(cpy_stack_a);
 	}
 	ft_lstclear(cpy_stack_a, free);

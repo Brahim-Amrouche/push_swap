@@ -5,50 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 22:57:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/10 20:47:44 by bamrouch         ###   ########.fr       */
+/*   Created: 2023/01/07 19:59:02 by bamrouch          #+#    #+#             */
+/*   Updated: 2023/01/14 01:45:09 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_free_lis(int ***lis)
+void	ft_free_stack_group(t_stack_group *stacks)
 {
-	int	i;
-
-	i = (*lis)[0][0];
-	while (i > 0)
-		free((*lis)[--i]);
-	free(*lis);
-	*lis = NULL;
+	ft_lstclear(&(stacks->a), free);
+	ft_lstclear(&(stacks->b), free);
 }
 
-int	*ft_return_lis_result(int ***lis)
+void	ft_exit_process_with_error(t_stack_group *stacks)
 {
-	int	*res;
-
-	res = (*lis)[(*lis)[0][0] - 1];
-	(*lis)[0][0]--;
-	ft_free_lis(lis);
-	return (res);
+	write(2, "Error\n", 6);
+	ft_free_stack_group(stacks);
+	exit(EXIT_FAILURE);
 }
 
-int	*ft_copy_stack_to_list(t_list *stack)
+int	ft_abs(int i)
 {
-	int	i;
-	int	*res;
-
-	res = malloc((ft_lstsize(stack) + 1) * sizeof(int));
-	if (!res)
-		return (NULL);
-	i = 1;
-	while (stack)
-	{
-		res[i++] = *(int *)stack->content;
-		stack = stack->next;
-	}
-	res[0] = i;
-	return (res);
+	if (i < 0)
+		return (i * -1);
+	return (i);
 }
 
 t_boolean	ft_is_space(char c)
@@ -57,4 +38,41 @@ t_boolean	ft_is_space(char c)
 		|| c == ' ')
 		return (TRUE);
 	return (FALSE);
+}
+// void	ft_print_stacks(t_stack_group *stacks)
+// {
+// 	t_list	*temp;
+
+// 	ft_printf("Stack a ======= \n");
+// 	temp = stacks->a;
+// 	while (temp)
+// 	{
+// 		ft_printf("%d \n", *((int *)temp->content));
+// 		temp = temp->next;
+// 	}
+// 	ft_printf("Stack b ======= \n");
+// 	temp = stacks->b;
+// 	while (temp)
+// 	{
+// 		ft_printf("%d \n", *((int *)temp->content));
+// 		temp = temp->next;
+// 	}
+// 	ft_printf("End of printing Stacks \n");
+// }
+
+void	ft_find_array_limits(int *array, int limits[2])
+{
+	int	pos;
+
+	limits[1] = 1;
+	limits[0] = 1;
+	pos = 2;
+	while (pos < array[0])
+	{
+		if (array[pos] > array[limits[1]])
+			limits[1] = pos;
+		else if (array[pos] < array[limits[0]])
+			limits[0] = pos;
+		pos++;
+	}
 }
