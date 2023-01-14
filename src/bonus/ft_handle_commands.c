@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:33:38 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/14 18:26:07 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/14 19:39:19 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_boolean	ft_rotate_commands_no_print(t_stack_group *stacks, char *cmd)
 	return (FALSE);
 }
 
-t_boolean	ft_reverse_rotate_commands_no_print(t_stack_group *stacks, char *cmd)
+t_boolean	ft_reverse_rotate_commands_no_print(t_stack_group *stacks,
+		char *cmd)
 {
 	if (!ft_strncmp(cmd, "rra\n", 4))
 	{
@@ -93,14 +94,14 @@ t_boolean	ft_reverse_rotate_commands_no_print(t_stack_group *stacks, char *cmd)
 t_boolean	ft_handle_commands_bonus(t_stack_group *stacks, char *cmd)
 {
 	if (!cmd)
-		return FALSE;
+		return (FALSE);
 	if (ft_swap_commands_no_print(stacks, cmd))
-		return TRUE;
+		return (TRUE);
 	else if (ft_push_commands_no_print(stacks, cmd))
-		return TRUE;
+		return (TRUE);
 	else if (ft_rotate_commands_no_print(stacks, cmd))
-		return TRUE;
+		return (TRUE);
 	else if (ft_reverse_rotate_commands_no_print(stacks, cmd))
-		return TRUE;
-	return FALSE;
+		return (TRUE);
+	return (FALSE);
 }

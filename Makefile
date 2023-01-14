@@ -19,9 +19,11 @@ BONUS_SRCS = ./src/ft_commands.c \
 ./src/ft_push_swap_solution.c \
 ./src/ft_solution_utils_1.c \
 ./src/ft_solution_utils_2.c \
-./src/ft_solution_utils_3.c \
-${wildcard ./src/bonus/*.c}
-
+./src/ft_solution_utils_3.c\
+./src/bonus/get_next_line_utils.c \
+./src/bonus/get_next_line.c \
+./src/bonus/ft_handle_commands.c \
+./src/bonus/main.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -29,7 +31,7 @@ BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 HEADERS = -I./libft/headers -I./libft/libft -I./include 
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address $(HEADERS)
+FLAGS = -Wall -Wextra -Werror $(HEADERS)
 
 CC = cc
 

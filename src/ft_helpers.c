@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 19:59:02 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/14 18:28:20 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:06:32 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_free_stack_group(t_stack_group *stacks)
 
 void	ft_exit_process_with_error(t_stack_group *stacks)
 {
-	write(2, "Error\n", 6);
 	ft_free_stack_group(stacks);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
@@ -39,6 +39,7 @@ t_boolean	ft_is_space(char c)
 		return (TRUE);
 	return (FALSE);
 }
+
 // void	ft_print_stacks(t_stack_group *stacks)
 // {
 // 	t_list	*temp;

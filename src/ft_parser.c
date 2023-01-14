@@ -67,39 +67,42 @@ t_boolean	ft_str_is_integer(const char *str, long *res)
 	return (TRUE);
 }
 
-t_boolean	ft_parse_input(t_list **stack, int input_len, char *input_content[])
+t_boolean	ft_parse_input(t_list **stack, char *content)
 {
-	int		i;
-	size_t	j;
 	long	temp;
 
-	i = 1;
-	while (i < input_len)
-	{
-		j = 0;
-		while (input_content[i][j])
-		{
-			while (input_content[i][j] && ft_is_space(input_content[i][j]))
-				j++;
-			if (!input_content[i][j])
-				break ;
-			if (!ft_str_is_integer(&(input_content[i][j]), &temp))
-				return (FALSE);
-			if (!ft_push_to_stack(stack, temp))
-				return (FALSE);
-			while (input_content[i][j] && !ft_is_space(input_content[i][j]))
-				j++;
-		}
-		i++;
-	}
+	if (!ft_str_is_integer(content, &temp))
+		return (FALSE);
+	if (!ft_push_to_stack(stack, temp))
+		return (FALSE);
 	return (TRUE);
 }
 
 void	ft_init_stack_group(t_stack_group *stacks, int input_len,
 		char *input_content[])
 {
+	int		i;
+	size_t	j;
+
 	if (input_len == 1)
 		exit(EXIT_SUCCESS);
-	if (!ft_parse_input(&(stacks->a), input_len, input_content))
-		ft_exit_process_with_error(stacks);
+	i = 1;
+	while (i < input_len)
+	{
+		j = 0;
+		if (!input_content[i][0])
+			ft_exit_process_with_error(stacks);
+		while (input_content[i][j])
+		{
+			while (input_content[i][j] && ft_is_space(input_content[i][j]))
+				j++;
+			if (!input_content[i][j])
+				break ;
+			if (!ft_parse_input(&(stacks->a), &(input_content[i][j])))
+				ft_exit_process_with_error(stacks);
+			while (input_content[i][j] && !ft_is_space(input_content[i][j]))
+				j++;
+		}
+		i++;
+	}
 }
