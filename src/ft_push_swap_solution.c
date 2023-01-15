@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:02:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/14 19:32:36 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:08:39 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_find_stack_solution(t_stack_group *stacks)
 	int	*lis;
 
 	if (!stacks->a)
-		return ;
+		ft_exit_process_with_error(stacks);
 	lis = ft_find_longest_lis(stacks);
 	if (!lis)
 		ft_exit_process_with_error(stacks);

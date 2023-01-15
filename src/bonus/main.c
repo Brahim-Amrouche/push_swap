@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 01:46:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/14 20:58:57 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:06:25 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	main(int argc, char *argv[])
 
 	ft_bzero(&stacks, sizeof(stacks));
 	ft_init_stack_group(&stacks, argc, argv);
+	if (!stacks.a)
+		ft_exit_process_with_error(&stacks);
 	if (ft_sort_stack_with_commands(&stacks))
 		ft_printf("OK\n");
 	ft_free_stack_group(&stacks);

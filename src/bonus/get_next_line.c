@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 00:23:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/14 00:30:02 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:49:51 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_next_line_helper(int fd, char *buffer, char **line)
 	ssize_t	i;
 
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	while (bytes_read >= 0 || *line)
+	while (bytes_read >= 0 || (*line && bytes_read >= 0))
 	{
 		i = 0;
 		*line = ft_strjoin_buffer_to_line(line, buffer);
@@ -78,6 +78,10 @@ char	*get_next_line_helper(int fd, char *buffer, char **line)
 			return (ft_strjoin_buffer_to_line(line, ""));
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
+	if (bytes_read < 0)
+		free(*line);
+	if (bytes_read < 0)
+		*line = NULL;
 	return (NULL);
 }
 
